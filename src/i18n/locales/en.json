@@ -1,0 +1,32 @@
+{
+  "nav": {
+    "shoppingLists": "Shopping Lists",
+    "familyGroups": "Family Groups",
+    "profile": "Profile",
+    "summary": "Summary"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "name": "Name",
+    "submit": "Submit",
+    "logout": "Logout"
+  },
+  "shopping": {
+    "addItem": "Add Item",
+    "markPurchased": "Mark as Purchased",
+    "quantity": "Quantity",
+    "description": "Description",
+    "addedBy": "Added by"
+  },
+  "family": {
+    "createGroup": "Create Family Group",
+    "inviteMember": "Invite Member",
+    "acceptInvite": "Accept Invitation",
+    "members": "Members",
+    "pendingInvites": "Pending Invites"
+  }
+}

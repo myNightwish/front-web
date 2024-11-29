@@ -1,0 +1,32 @@
+{
+  "nav": {
+    "shoppingLists": "购物清单",
+    "familyGroups": "家庭群组",
+    "profile": "个人资料",
+    "summary": "汇总"
+  },
+  "auth": {
+    "login": "登录",
+    "register": "注册",
+    "email": "邮箱",
+    "password": "密码",
+    "confirmPassword": "确认密码",
+    "name": "姓名",
+    "submit": "提交",
+    "logout": "退出"
+  },
+  "shopping": {
+    "addItem": "添加物品",
+    "markPurchased": "标记已购买",
+    "quantity": "数量",
+    "description": "描述",
+    "addedBy": "添加者"
+  },
+  "family": {
+    "createGroup": "创建家庭群组",
+    "inviteMember": "邀请成员",
+    "acceptInvite": "接受邀请",
+    "members": "成员",
+    "pendingInvites": "待处理邀请"
+  }
+}
