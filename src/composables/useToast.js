@@ -1,33 +1,40 @@
 import { ref } from 'vue';
 
-export function useToast() {
-  const message = ref('');
-  const type = ref('');
-  const show = ref(false);
+const toasts = ref([]);
+let toastId = 0;
 
-  const toast = {
-    success(msg) {
-      message.value = msg;
-      type.value = 'success';
-      show.value = true;
+export function useToast() {
+  const addToast = (message, type = 'info', duration = 3000) => {
+    const id = ++toastId;
+    toasts.value.push({ id, message, type });
+
+    if (duration > 0) {
       setTimeout(() => {
-        show.value = false;
-      }, 3000);
-    },
-    error(msg) {
-      message.value = msg;
-      type.value = 'error';
-      show.value = true;
-      setTimeout(() => {
-        show.value = false;
-      }, 3000);
+        removeToast(id);
+      }, duration);
+    }
+
+    return id;
+  };
+
+  const removeToast = (id) => {
+    const index = toasts.value.findIndex(toast => toast.id === id);
+    if (index > -1) {
+      toasts.value.splice(index, 1);
     }
   };
 
+  const success = (message, duration) => addToast(message, 'success', duration);
+  const error = (message, duration) => addToast(message, 'error', duration);
+  const warning = (message, duration) => addToast(message, 'warning', duration);
+  const info = (message, duration) => addToast(message, 'info', duration);
+
   return {
-    message,
-    type,
-    show,
-    toast
+    toasts,
+    success,
+    error,
+    warning,
+    info,
+    removeToast
   };
 }
