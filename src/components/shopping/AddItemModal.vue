@@ -13,18 +13,6 @@
           />
         </div>
         <div>
-          <label class="block text-sm font-medium mb-1">所属群组</label>
-          <select
-            v-model="form.familyId"
-            class="w-full px-3 py-2 border rounded-lg"
-            required
-          >
-            <option v-for="family in families" :key="family.familyId" :value="family.familyId">
-              {{ family.familyName }}
-            </option>
-          </select>
-        </div>
-        <div>
           <label class="block text-sm font-medium mb-1">数量</label>
           <input
             v-model.number="form.quantity"
@@ -71,17 +59,18 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 const props = defineProps({
   families: {
     type: Array,
     required: true
-  }
+  },
+  curFamilyId: {
+    type: Number,  // 如果确实是数字类型，可以去掉注释
+    required: true
+  },
 });
-
-const emit = defineEmits(['close', 'add-item']);
-
 const form = ref({
   name: '',
   familyId: 0,
@@ -89,9 +78,14 @@ const form = ref({
   description: '',
   image: ''
 });
+// 观察 curFamilyId 的变化，更新 form.familyId
+watch(() => props.curFamilyId, (newFamilyId) => {
+  form.value.familyId = newFamilyId;
+}, { immediate: true }); // immediate: true 表示初始化时也会触发一次更新
+
+const emit = defineEmits(['close', 'add-item']);
 
 const handleSubmit = () => {
-  console.log('form.value--', form.value)
   emit('add-item', { ...form.value });
 };
 </script>

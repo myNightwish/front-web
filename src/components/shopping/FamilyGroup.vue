@@ -1,22 +1,37 @@
 <template>
   <div class="space-y-4">
     <div class="flex justify-between items-center">
-      <h3 class="text-xl font-semibold">{{ family.familyName }}</h3>
-      <button
-        @click="toggleSelectionMode"
-        :class="[
-          'px-4 py-2 rounded-lg',
-          hasUnpurchasedItems
-            ? isSelectionMode
-              ? 'bg-green-600 text-white hover:bg-green-700'
-              : 'bg-blue-600 text-white hover:bg-blue-700'
-            : 'bg-gray-400 text-gray-200 cursor-not-allowed'
-        ]"
-        :disabled="!hasUnpurchasedItems"
-      >
-        {{ isSelectionMode ? '标记为已购' : '批量勾选' }}
-      </button>
-    </div>
+        <h3 class="text-xl font-semibold">群组名：{{ family.familyName }}</h3>
+        <div class="flex justify-center gap-10 items-center">
+          <button
+            @click="toggleSelectionMode"
+            :class="[
+              'px-4 py-2 rounded-lg',
+              hasUnpurchasedItems
+                ? isSelectionMode
+                  ? 'bg-green-600 text-white hover:bg-green-700'
+                  : 'bg-blue-600 text-white hover:bg-blue-700'
+                : 'bg-gray-400 text-gray-200 cursor-not-allowed'
+            ]"
+            :disabled="!hasUnpurchasedItems"
+          >
+            {{ isSelectionMode ? '标记为已购' : '批量勾选' }}
+          </button>
+          <button
+            v-if="isSelectionMode && selectedItems.length > 0"
+            @click="$emit('confirm-batch', family.familyId)"
+            class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+          >
+            确认批量操作
+          </button>
+          <button
+            @click="$emit('add-item', family.familyId);"
+            class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+          >
+            添加物品
+          </button>
+        </div>
+  </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <ShoppingItem
@@ -28,14 +43,6 @@
         @toggle-select="(itemId) => $emit('toggle-select', { familyId: family.familyId, itemId })"
       />
     </div>
-
-    <button
-      v-if="isSelectionMode && selectedItems.length > 0"
-      @click="$emit('confirm-batch', family.familyId)"
-      class="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
-    >
-      确认批量操作
-    </button>
   </div>
 </template>
 
@@ -56,8 +63,7 @@ const props = defineProps({
 
 const isSelectionMode = ref(false);
 
-const emit = defineEmits(['select-all', 'confirm-batch', 'toggle-select']);
-
+const emit = defineEmits(['select-all', 'confirm-batch', 'toggle-select', 'add-item']);
 const hasUnpurchasedItems = computed(() => 
   props.family.items.some(item => !item.purchased)
 );

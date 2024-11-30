@@ -1,7 +1,8 @@
 <template>
   <div class="space-y-6">
-    <ShoppingHeader @add-item="showAddItemModal = true" />
-    
+    <div class="flex justify-between items-center">
+        <h2 class="text-2xl font-semibold">购物清单</h2>
+    </div>
     <div v-for="family in groupedItems" :key="family.familyId" class="space-y-4">
       <FamilyGroup
         :family="family"
@@ -9,14 +10,15 @@
         @select-all="handleSelectAll"
         @confirm-batch="handleBatchPurchase"
         @toggle-select="handleToggleSelect"
+        @add-item="handleAddBtn"
       />
     </div>
-
     <AddItemModal
       v-if="showAddItemModal"
       @close="showAddItemModal = false"
       @add-item="handleAddItem"
       :families="groupedItems"
+      :curFamilyId = "addBtnId"
     />
 
     <ConfirmationModal
@@ -32,7 +34,6 @@
 import { ref, onMounted } from 'vue';
 import { useToast } from '@/composables/useToast';
 import { useShoppingItems } from '@/composables/useShoppingItems';
-import ShoppingHeader from './shopping/ShoppingHeader.vue';
 import FamilyGroup from './shopping/FamilyGroup.vue';
 import AddItemModal from './shopping/AddItemModal.vue';
 import ConfirmationModal from './shopping/ConfirmationModal.vue';
@@ -41,6 +42,7 @@ const showAddItemModal = ref(false);
 const showConfirmModal = ref(false);
 const confirmationMessage = ref('');
 const pendingAction = ref(null);
+const addBtnId = ref(0);
 
 const { toast } = useToast();
 const {
@@ -60,6 +62,10 @@ const handleSelectAll = (familyId) => {
     .filter(item => !item.purchased)
     .map(item => item.id);
 };
+const handleAddBtn = (id) => {
+  showAddItemModal.value = true;
+  addBtnId.value = id;
+}
 
 const handleToggleSelect = ({ familyId, itemId }) => {
   if (!selectedItems.value[familyId]) {
