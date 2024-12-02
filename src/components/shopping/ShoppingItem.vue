@@ -28,7 +28,7 @@
         class="w-16 h-16 object-cover rounded"
       />
     </div>
-    <p class="text-sm">{{ item.description }}</p>
+    <p class="text-sm">描述: {{ item.description }}</p>
   </div>
 </template>
 

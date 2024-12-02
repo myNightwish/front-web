@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-4">
     <div class="flex justify-between items-center">
-        <h3 class="text-xl font-semibold">群组名：{{ family.familyName }}</h3>
+        <h3 class="text-xl font-semibold">群名：{{ family.familyName }}</h3>
         <div class="flex justify-center gap-10 items-center">
           <button
             @click="toggleSelectionMode"
@@ -31,8 +31,7 @@
             添加物品
           </button>
         </div>
-  </div>
-
+    </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <ShoppingItem
         v-for="item in family.items"

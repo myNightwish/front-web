@@ -2,7 +2,7 @@
   <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
     <div class="flex justify-between items-start">
       <div class="">
-        <h3 class="text-xl font-semibold text-gray-900">群组名：{{ family.name }}</h3>
+        <h3 class="text-xl font-semibold text-gray-900">群组：{{ family.name }}</h3>
         <div class="mt-2 space-y-1 gap-8 flex justify-between items-center">
           <div class="flex items-center space-x-2">
             <span class="text-sm text-gray-600">角色:</span>

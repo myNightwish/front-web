@@ -8,7 +8,7 @@
           + Create New Group
         </button>
       </div>
-      <div class="grid gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <FamilyCard 
           v-for="family in userData.families" 
           :key="family.id" 
@@ -51,8 +51,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import axios from 'axios';
-import {createFamily, deleteFamily, inviteFamily} from '@/api/family.js';
+import {createFamily, deleteFamily, inviteFamily, getFamilies} from '@/api/family.js';
 import FamilyCard from './family/FamilyCard.vue';
 import { userApi } from '@/api/user';
 import { useToast } from '@/composables/useToast';
@@ -67,12 +66,11 @@ const inviteEmail = ref(''); // 邀请的邮箱
 
 // 获取群组列表
 const fetchFamilies = async () => {
-  try {
-    const response = await axios.get('/api/families');
-    families.value = response.data;
-  } catch (err) {
+  getFamilies().then((response) => {
+    families.value = response;
+  }).catch(_ => {
     error('Error fetching families！', 3000);
-  }
+  });
 };
 
 // 打开创建模态框
@@ -124,7 +122,7 @@ onMounted(() => {
   getCurUserInfo().then((res) => {
     userData.value = res;
   }).catch(_ => {
-    error('Error deleting family！', 3000);
+    error('Error userInfo！', 3000);
   });
 });
 </script>

@@ -6,10 +6,9 @@ import App from './App.vue';
 import { useAuthStore } from '@/stores/auth';
 import ShoppingList from '@/components/ShoppingList.vue';
 import FamilyGroups from '@/components/FamilyGroups.vue';
-import Summary from '@/views/Summary.vue';
-import Login from '@/views/Login.vue';
-import Register from '@/views/Register.vue';
-import InvitationList from '@/views/InvitationList.vue';
+import Login from '@/components/Login.vue';
+import Register from '@/components/Register.vue';
+import InvitationList from '@/components/InvitationList.vue';
 import './style.css';
 
 const router = createRouter({
@@ -26,11 +25,6 @@ const router = createRouter({
     { 
       path: '/groups',
       component: FamilyGroups,
-      meta: { requiresAuth: true }
-    },
-    { 
-      path: '/summary',
-      component: Summary,
       meta: { requiresAuth: true }
     },
     { 

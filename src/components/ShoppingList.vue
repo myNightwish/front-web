@@ -1,8 +1,5 @@
 <template>
   <div class="space-y-6">
-    <div class="flex justify-between items-center">
-        <h2 class="text-2xl font-semibold">购物清单</h2>
-    </div>
     <div v-for="family in groupedItems" :key="family.familyId" class="space-y-4">
       <FamilyGroup
         :family="family"
@@ -38,6 +35,7 @@ import FamilyGroup from './shopping/FamilyGroup.vue';
 import AddItemModal from './shopping/AddItemModal.vue';
 import ConfirmationModal from './shopping/ConfirmationModal.vue';
 
+const { success, error } = useToast();
 const showAddItemModal = ref(false);
 const showConfirmModal = ref(false);
 const confirmationMessage = ref('');
@@ -92,10 +90,10 @@ const handleConfirmPurchase = async () => {
       const { familyId } = pendingAction.value;
       await markItemsAsPurchased(familyId, selectedItems.value[familyId]);
       selectedItems.value[familyId] = [];
-      toast.success('物品已成功更新');
+      success('物品已成功更新');
     }
-  } catch (error) {
-    toast.error('更新失败，请重试');
+  } catch (err) {
+    error('更新失败，请重试');
   } finally {
     showConfirmModal.value = false;
     pendingAction.value = null;
@@ -106,10 +104,10 @@ const handleAddItem = async (newItem) => {
   try {
     await addNewItem(newItem);
     showAddItemModal.value = false;
-    toast.success('物品添加成功');
+    success('物品添加成功');
     await fetchItems();
-  } catch (error) {
-    toast.error('添加失败，请重试');
+  } catch (_) {
+    error('添加失败，请重试');
   }
 };
 

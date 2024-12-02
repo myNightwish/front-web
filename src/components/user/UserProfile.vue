@@ -14,6 +14,10 @@
 import { ref } from 'vue';
 import UserProfileDropdown from './UserProfileDropdown.vue';
 import { userApi } from '@/api/user';
+// import { useUserStore } from '@/stores/user'
+// import { userApi } from '@/api/user';
+
+// const userStore = useUserStore();
 
 const userData = ref({});
 const {getCurUserInfo} = userApi;
@@ -27,8 +31,6 @@ getCurUserInfo().then((res) => {
 });
 
 const handleLogout = () => {
-  // Implement logout logic
-  console.log('Logging out...');
   emit('logout');
 };
 </script>

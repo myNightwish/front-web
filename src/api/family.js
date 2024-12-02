@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '@/utils/axios'; 
 
 export const createFamily = async (name) => {
   const response = await axios.post('/api/families/create', { 
@@ -15,5 +15,11 @@ export const deleteFamily = async (familyId) => {
 
 export const inviteFamily = async (familyId, email) => {
   const response = await axios.post(`/api/families/${familyId}/invite`, { email });
+  return response.data;
+};
+
+// 获取群组列表
+export const getFamilies = async () => {
+  const response = await axios.get('/api/families');
   return response.data;
 };
