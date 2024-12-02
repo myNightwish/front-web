@@ -6,7 +6,7 @@
         <div class="mt-2 space-y-1 gap-8 flex justify-between items-center">
           <div class="flex items-center space-x-2">
             <span class="text-sm text-gray-600">角色:</span>
-            <RoleBadge :role="family.family_member.role" />
+            <RoleBadge :role="family.role" />
           </div>
           <div class="flex items-center space-x-2">
             <span class="text-sm text-gray-600">状态:</span>

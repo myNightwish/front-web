@@ -1,5 +1,9 @@
 import axios from 'axios';
+import { useAuthStore } from '@/stores/auth';
+import router from '@/router/index';
+import { useToast } from '@/composables/useToast';
 
+const toast = useToast();
 // 创建一个 axios 实例
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:5173', // 你的 API 基础 URL
@@ -24,17 +28,20 @@ axiosInstance.interceptors.request.use(
 // 设置响应拦截器
 axiosInstance.interceptors.response.use(
   response => response,
-  error => {
+  async error => {
     if (error.response && error.response.status === 401) {
-      const { isTokenExpired } = error.response.data;
-
-      if (isTokenExpired) {
-        // 处理 token 过期，跳转到登录页面
-        window.location.href = '/login'; // 根据你的路由配置修改
-      } else {
-        // 处理其他 401 错误
-        console.error('Authentication error');
+      const authStore = useAuthStore();
+      await authStore.logout();
+      toast.warn('登录已过期，请重新登录');
+      // 只有当不在登录页面时才重定向
+      if (router.currentRoute.value.path !== '/login') {
+        router.push('/login');
       }
+    }
+    // 如果是 400 错误，弹出统一的提示
+    if (error.response && error.response.status === 400) {
+      const msg = error.response.data?.message || '请求错误，请稍后再试';  // 根据接口返回的错误信息调整
+      toast.warn(msg);
     }
     return Promise.reject(error);
   }

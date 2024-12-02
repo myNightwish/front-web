@@ -9,7 +9,7 @@
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <FamilyCard 
-          v-for="family in userData.families" 
+          v-for="family in families" 
           :key="family.id" 
           :family="family"
           @delete-family="deleteFamilyClk"
@@ -51,12 +51,9 @@
 import { ref, onMounted } from 'vue';
 import {createFamily, deleteFamily, inviteFamily, getFamilies} from '@/api/family.js';
 import FamilyCard from './family/FamilyCard.vue';
-import { userApi } from '@/api/user';
 import { useToast } from '@/composables/useToast';
 
 const { success, error } = useToast();
-const {getCurUserInfo} = userApi;
-const userData = ref({});
 const families = ref([]); // 存储群组数据
 const showCreateModal = ref(false); // 控制模态框显示
 const newFamilyName = ref(''); // 新群组名称
@@ -114,13 +111,5 @@ const viewDetails = () => {
 };
 
 // 初始加载
-onMounted(() => {
-  fetchFamilies();
-  //  todo: 接口服务要改
-  getCurUserInfo().then((res) => {
-    userData.value = res;
-  }).catch(_ => {
-    error('Error userInfo！', 3000);
-  });
-});
+onMounted(fetchFamilies);
 </script>

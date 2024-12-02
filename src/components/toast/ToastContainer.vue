@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed inset-0 z-50 pointer-events-none flex items-center justify-center">
+  <div div class="fixed inset-0 z-50 pointer-events-none flex items-center justify-center">
     <TransitionGroup
       enter-active-class="transform ease-out duration-300"
       enter-from-class="translate-y-2 opacity-0 scale-95"
@@ -12,7 +12,7 @@
       <div
         v-for="toast in toasts"
         :key="toast.id"
-        class="max-w-md w-full bg-white shadow-xl rounded-lg pointer-events-auto transform transition-all duration-300"
+        class="w-[20rem] w-full rounded-xl pointer-events-auto transform transition-all duration-300"
         :class="[
           toast.type === 'success' && 'bg-green-50 shadow-green-100',
           toast.type === 'error' && 'bg-red-50 shadow-red-100',
@@ -58,7 +58,7 @@
 import { defineComponent, h } from 'vue';
 import { useToast } from '@/composables/useToast';
 
-const { toasts, removeToast } = useToast();
+const { toasts } = useToast();
 
 const toastIcon = (type) => ({
   success: defineComponent({

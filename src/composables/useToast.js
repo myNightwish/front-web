@@ -26,14 +26,14 @@ export function useToast() {
 
   const success = (message, duration) => addToast(message, 'success', duration);
   const error = (message, duration) => addToast(message, 'error', duration);
-  const warning = (message, duration) => addToast(message, 'warning', duration);
+  const warn = (message, duration) => addToast(message, 'warning', duration);
   const info = (message, duration) => addToast(message, 'info', duration);
 
   return {
     toasts,
     success,
     error,
-    warning,
+    warn,
     info,
     removeToast
   };

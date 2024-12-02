@@ -16,16 +16,17 @@
           >
             {{ $t(item.name) }}  <!-- 动态翻译 -->
           </router-link>
-          <button @click="toggleTheme" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+          <!-- <button @click="toggleTheme" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
             <Sun v-if="isDark" class="h-5 w-5" />
             <Moon v-else class="h-5 w-5" />
-          </button>
+          </button> -->
         </nav>
-        <div>
+        <!-- <div>
           <button @click="changeLanguage('zh')">中文</button>
           <button @click="changeLanguage('en')">English</button>
-        </div>
+        </div> -->
          <UserProfile @logout="quitLogin"></UserProfile>
+
       </div>
     </div>
   </header>
