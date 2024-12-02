@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+  <div class="fixed z-10 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
     <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md">
       <h3 class="text-lg font-medium mb-4">确认操作</h3>
       <p class="mb-6">{{ message }}</p>

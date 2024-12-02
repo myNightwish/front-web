@@ -1,5 +1,4 @@
 <template>
-  <div class="space-y-6">
     <div class="mt-8">
       <div class="flex items-center justify-end">
         <button 
@@ -19,7 +18,7 @@
       </div>
   </div>
     <!-- 创建群组模态框 -->
-    <div v-if="showCreateModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div v-if="showCreateModal" class="fixed z-10 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-96 space-y-4">
         <h3 class="text-lg font-medium">Create New Group</h3>
         <input 
@@ -46,7 +45,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script setup>

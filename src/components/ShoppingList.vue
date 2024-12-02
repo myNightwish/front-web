@@ -1,5 +1,7 @@
 <template>
-  <div class="space-y-6">
+    <div v-if="groupedItems.length === 0" class="text-center text-gray-500">
+      You have no shoppingLists.
+    </div>
     <div v-for="family in groupedItems" :key="family.familyId" class="space-y-4">
       <FamilyGroup
         :family="family"
@@ -24,7 +26,6 @@
       @confirm="handleConfirmPurchase"
       @cancel="showConfirmModal = false"
     />
-  </div>
 </template>
 
 <script setup>

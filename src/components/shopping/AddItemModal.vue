@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+  <div class="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
     <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md">
       <h3 class="text-lg font-medium mb-4">添加新物品</h3>
       <form @submit.prevent="handleSubmit" class="space-y-4">

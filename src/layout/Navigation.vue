@@ -1,5 +1,5 @@
 <template>
-  <header class="sticky top-0 z-50 w-full border-b bg-white/80 dark:bg-gray-900/80 backdrop-blur">
+  <header class="sticky top-0 z-10 w-full border-b bg-white/80 dark:bg-gray-900/80 backdrop-blur">
     <div class="container mx-auto px-4">
       <div class="flex h-16 items-center justify-between">
         <router-link to="/" class="flex items-center space-x-2">
@@ -12,6 +12,7 @@
             :key="item.path" 
             :to="item.path"
             class="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400"
+            active-class="text-indigo-600 dark:text-indigo-400 font-semibold"
           >
             {{ $t(item.name) }}  <!-- 动态翻译 -->
           </router-link>
